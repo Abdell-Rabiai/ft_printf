@@ -1,6 +1,6 @@
-NAME = libftprintf.a
+NAME = ft_printf.a
 
-SOURCES = ft_printf.c\
+SOURCES = ft_printf.c ft_printf_utils.c\
 
 CC = cc
 

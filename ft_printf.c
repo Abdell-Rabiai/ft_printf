@@ -10,11 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include"libft/libft.h"
 # include"ft_printf.h"
-# include <stdarg.h>
-
-#define SPECIFIER "%scdiuxXp"
 
 int ft_strchar(char *string, char c) // look for c if found return it
 {
@@ -27,33 +23,10 @@ int ft_strchar(char *string, char c) // look for c if found return it
 	return (0);
 }
 
-void	ft_putnbr_fd_count_base(int n, int fd, int *count, int base)
+void ft_put0x_hexa_count(unsigned int nb, int fd, int *count)
 {
-	long	nb;
-	long quotient;
-
-	quotient = n;
-	while (quotient != 0)
-    {
-        remainder = quotient % 16;
-        if (remainder < 10)
-            hexadecimalnum[j++] = 48 + remainder;
-        else
-            hexadecimalnum[j++] = 55 + remainder;
-        quotient = quotient / 16;
-    }
-	if (n < 0)
-	{
-		ft_putchar_fd_count('-', fd, count);
-		nb *= -1;
-	}
-	if (nb < 10)
-		ft_putchar_fd_count(nb + '0', fd, count);
-	else
-	{
-		ft_putnbr_fd_count(nb / 10, fd, count);
-		ft_putnbr_fd_count(nb % 10, fd, count);
-	}
+	ft_putstr_fd_count("0x", fd, count);
+	ft_putnbr_fd_hexa_count(nb, fd, count, 'x');
 }
 
 void ft_convert_format(va_list arg_p, char format_character, int *count)
@@ -65,11 +38,13 @@ void ft_convert_format(va_list arg_p, char format_character, int *count)
 	else if (format_character == 'c')
 		ft_putchar_fd_count(va_arg(arg_p, int), 1, count);
 	else if (format_character == 'd' || format_character == 'i')
-		ft_putnbr_fd_count_base(va_arg(arg_p, int), 1, count);
+		ft_putnbr_fd_count(va_arg(arg_p, int), 1, count);
 	else if (format_character == 'u')
 		ft_putnbr_fd_uns_count(va_arg(arg_p, int), 1, count);
 	else if (format_character == 'x' || format_character == 'X')
-		ft_putnbr_fd_count_base(va_arg(arg_p, int), 1, count);
+		ft_putnbr_fd_hexa_count(va_arg(arg_p, int), 1, count, format_character);
+	else if (format_character == 'p')
+		ft_put0x_hexa_count(va_arg(arg_p, int), 1, count);
 }
 
 int ft_printf(const char *string_format, ...)
@@ -93,12 +68,15 @@ int ft_printf(const char *string_format, ...)
 	return (count);
 }
 
-int main()
-{
-	// printf("[%c]\n",ft_strchar("cspdiuxX%",'d')); 
-	int x = 2147483647;
-	ft_printf("hello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} ","HMAYMOU", 'X', x, -2147483648, 4294967295);
-	printf("\n\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} ","HMAYMOU", 'X', x, -2147483648, 4294967295);
-	// printf("**%d**\n\n",ft_printf("hello_world {%} ","HMAYMOU"));
-	// printf("**%d**\n\n",printf("hello_world {%} ","HMAYMOU")); 
-}
+// int main()
+// {
+// 	// printf("[%c]\n",ft_strchar("cspdiuxX%",'d')); 
+// 	int x = 2147483647;
+// 	unsigned int hex = 4294967295; // 214748 % 16 = 13421, 
+// 	ft_printf("\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} ","TABI3A", 'X', x, -214748364, 429496729, hex, 21465);
+// 	printf("\n\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} \n\n","TABI3A", 'X', x, -214748364, 429496729, hex, 21465);
+// 	ft_printf("%p\n\n",&x);
+// 	printf("%p\n\n",&x);
+// 	// printf("**%d**\n\n",ft_printf("hello_world {%} ","HMAYMOU"));
+// 	// printf("**%d**\n\n",printf("hello_world {%} ","HMAYMOU")); 
+// }
