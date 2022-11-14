@@ -44,7 +44,7 @@ void	ft_put_adress_count(void *adresse, int fd, int *count)
 
 	if (!adresse)
 	{
-		ft_putstr_fd_count("0x0", fd, count);
+		ft_putstr_fd_count("(nil)", fd, count);
 		return ;
 	}
 	nb = (size_t)adresse;
@@ -99,6 +99,6 @@ int	ft_printf(const char *string_format, ...)
 // 	// printf("[%c]\n",ft_strchar("cspdiuxX%",'d'));
 // 	int x = 2147483647;
 // 	unsigned int hex = -983461; // 214748 % 16 = 13421,
-// 	ft_printf("\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} ","TABI3A", 'X', x, -2147483647, 429496729, hex, &x);
-// 	printf("\n\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} \n\n","TABI3A", 'X', x, -2147483647, 429496729, hex, &x);
+// 	ft_printf("\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} ","TABI3A", 'X', x, -2147483647, 429496729, hex, 	NULL);
+// 	printf("\n\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} \n\n","TABI3A", 'X', x, -2147483647, 429496729, hex, NULL);
 // }
