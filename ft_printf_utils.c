@@ -18,43 +18,36 @@ void	ft_putchar_fd_count(char c, int fd, int *count)
 	(*count)++;
 }
 
-void	ft_putnbr_base16(size_t nb, int fd, int *count, char c)
+size_t ft_strlen(char *str)
 {
-	size_t	base_len;
-	char	*base16;
+	size_t len;
 
-	base_len = 16;
-	if (c == 'X')
-		base16 = "0123456789ABCDEF";
-	else if (c == 'x' || c == 'p')
-		base16 = "0123456789abcdef";
-	if (c != 'p')
-		nb = (unsigned int)nb;
-	if (nb < base_len)
-		ft_putchar_fd_count(base16[nb % base_len], fd, count);
-	else
-	{
-		ft_putnbr_base16(nb / base_len, fd, count, c);
-		ft_putnbr_base16(nb % base_len, fd, count, c);
-	}
+	len = 0;
+	while (*str++)
+		len++;
+	return (len);
 }
 
-void	ft_putnbr_base10(int n, int fd, int *count)
+void	ft_putnbr_base(int n, int fd, int *count, char *base)
 {
-	long	nb;
+	size_t base_len;
+	long nb;
 
+	base_len = ft_strlen(base);
 	nb = n;
-	if (nb < 0)
+	if (base_len == 16)
+		nb = (unsigned)n;
+	if (nb < 0 && base_len == 10)
 	{
 		ft_putchar_fd_count('-', fd, count);
 		nb *= -1;
 	}
-	if (nb < 10)
-		ft_putchar_fd_count(nb + 48, fd, count);
+	if (nb < (int)base_len)
+		ft_putchar_fd_count(base[nb % base_len], fd, count);
 	else
 	{
-		ft_putnbr_base10(nb / 10, fd, count);
-		ft_putnbr_base10(nb % 10, fd, count);
+		ft_putnbr_base(nb / base_len, fd, count, base);
+		ft_putnbr_base(nb % base_len, fd, count, base);
 	}
 }
 

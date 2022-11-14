@@ -24,9 +24,23 @@ int	ft_strchar(char *string, char c)
 	return (0);
 }
 
+void	ft_putnbr_base_adress(size_t n, int fd, int *count, char *base)
+{
+	size_t base_len;
+
+	base_len = ft_strlen(base);
+	if (n < base_len)
+		ft_putchar_fd_count(base[n % base_len], fd, count);
+	else
+	{
+		ft_putnbr_base_adress(n / base_len, fd, count, base);
+		ft_putnbr_base_adress(n % base_len, fd, count, base);
+	}
+}
+
 void	ft_put_adress_count(void *adresse, int fd, int *count)
 {
-	size_t	nb;
+	size_t	nb; // unsigned long
 
 	if (!adresse)
 	{
@@ -35,7 +49,7 @@ void	ft_put_adress_count(void *adresse, int fd, int *count)
 	}
 	nb = (size_t)adresse;
 	ft_putstr_fd_count("0x", fd, count);
-	ft_putnbr_base16(nb, 1, count, 'p');
+	ft_putnbr_base_adress(nb, fd, count, "0123456789abcdef");
 }
 
 void	ft_convert_format(va_list arg_p, char format_character, int *count)
@@ -47,13 +61,13 @@ void	ft_convert_format(va_list arg_p, char format_character, int *count)
 	else if (format_character == 'c')
 		ft_putchar_fd_count(va_arg(arg_p, int), 1, count);
 	else if (format_character == 'd' || format_character == 'i')
-		ft_putnbr_base10(va_arg(arg_p, int), 1, count);
+		ft_putnbr_base(va_arg(arg_p, int), 1, count, "0123456789");
 	else if (format_character == 'u')
 		ft_putnbr_fd_uns_count(va_arg(arg_p, int), 1, count);
 	else if (format_character == 'x')
-		ft_putnbr_base16(va_arg(arg_p, int), 1, count, format_character);
+		ft_putnbr_base(va_arg(arg_p, int), 1, count, "0123456789abcdef");
 	else if (format_character == 'X')
-		ft_putnbr_base16(va_arg(arg_p, int), 1, count, format_character);
+		ft_putnbr_base(va_arg(arg_p, int), 1, count, "0123456789ABCDEF");
 	else if (format_character == 'p')
 		ft_put_adress_count(va_arg(arg_p, void *), 1, count);
 }
@@ -84,7 +98,7 @@ int	ft_printf(const char *string_format, ...)
 // {
 // 	// printf("[%c]\n",ft_strchar("cspdiuxX%",'d'));
 // 	int x = 2147483647;
-// 	unsigned int hex = 4294967295; // 214748 % 16 = 13421,
-// 	ft_printf("\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} ","TABI3A", 'X', x, -214748364, 429496729, hex, &x);
-// 	printf("\n\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} \n\n","TABI3A", 'X', x, -214748364, 429496729, hex, &x);
+// 	unsigned int hex = -983461; // 214748 % 16 = 13421,
+// 	ft_printf("\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} ","TABI3A", 'X', x, -2147483647, 429496729, hex, &x);
+// 	printf("\n\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} \n\n","TABI3A", 'X', x, -2147483647, 429496729, hex, &x);
 // }
