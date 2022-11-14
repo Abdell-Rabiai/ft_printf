@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 14:23:27 by arabiai           #+#    #+#             */
+/*   Updated: 2022/11/14 14:23:42 by arabiai          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_putchar_fd_count(char c, int fd, int *count)
@@ -27,8 +39,8 @@ void	ft_putnbr_fd_count(int n, int fd, int *count)
 
 void	ft_putnbr_fd_hexa_count(size_t nb, int fd, int *count, char c)
 {
-	size_t hex;
-	
+	size_t	hex;
+
 	hex = 0;
 	if (c != 'p')
 	{
@@ -47,9 +59,9 @@ void	ft_putnbr_fd_hexa_count(size_t nb, int fd, int *count, char c)
 	else
 	{
 		if (c == 'X')
-			ft_putchar_fd_count(hex + 55, fd, count); // uppercase
+			ft_putchar_fd_count(hex + 55, fd, count);
 		if (c == 'x' || c == 'p')
-			ft_putchar_fd_count(hex + 87, fd, count); // lowercase
+			ft_putchar_fd_count(hex + 87, fd, count);
 	}
 }
 
