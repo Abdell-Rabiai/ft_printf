@@ -36,7 +36,7 @@ void	ft_putnbr_base(int n, int fd, int *count, char *base)
 	base_len = ft_strlen(base);
 	nb = n;
 	if (base_len == 16)
-		nb = (unsigned)n;
+		nb = (unsigned int)n;
 	if (nb < 0 && base_len == 10)
 	{
 		ft_putchar_fd_count('-', fd, count);
