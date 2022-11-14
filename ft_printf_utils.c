@@ -25,10 +25,16 @@ void	ft_putnbr_fd_count(int n, int fd, int *count)
 	}
 }
 
-void	ft_putnbr_fd_hexa_count(unsigned int nb, int fd, int *count, char c)
+void	ft_putnbr_fd_hexa_count(size_t nb, int fd, int *count, char c)
 {
-	unsigned int hex;
-
+	size_t hex;
+	
+	hex = 0;
+	if (c != 'p')
+	{
+		nb = (unsigned int)nb;
+		hex = (unsigned int)hex;
+	}
 	if (nb == 0)
 		return ;
 	else
@@ -42,7 +48,7 @@ void	ft_putnbr_fd_hexa_count(unsigned int nb, int fd, int *count, char c)
 	{
 		if (c == 'X')
 			ft_putchar_fd_count(hex + 55, fd, count); // uppercase
-		if (c == 'x')
+		if (c == 'x' || c == 'p')
 			ft_putchar_fd_count(hex + 87, fd, count); // lowercase
 	}
 }
