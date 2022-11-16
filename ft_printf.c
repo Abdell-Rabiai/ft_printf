@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:25:18 by arabiai           #+#    #+#             */
-/*   Updated: 2022/11/16 13:32:31 by arabiai          ###   ########.fr       */
+/*   Updated: 2022/11/16 13:35:37 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,3 @@ int	ft_printf(const char *string_format, ...)
 	}
 	return (count);
 }
-
-// int main()
-// {
-// 	// printf("[%c]\n",ft_strchar("cspdiuxX%",'d'));
-// 	int x = 2147483647;
-// 	unsigned int hex = -983461; // 214748 % 16 = 13421,
-// 	ft_printf("\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} ","TABI3A", 'X', x, -2147483647, 429496729, hex, 	NULL);
-// 	printf("\n\nhello_world {s = %s} : {c = %c} : {d = %d} : {i = %i} : {u = %u} : {x = %x} : {p = %p} \n\n","TABI3A", 'X', x, -2147483647, 429496729, hex, NULL);
-// }
