@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/12 13:22:16 by arabiai           #+#    #+#             */
-/*   Updated: 2022/11/14 19:05:06 by arabiai          ###   ########.fr       */
+/*   Created: 2022/11/16 13:25:18 by arabiai           #+#    #+#             */
+/*   Updated: 2022/11/16 13:32:31 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// # include "ft_printf_utils.c"
 
-int	ft_strchar(char *string, char c)
+static int	ft_strchar(char *string, char c)
 {
 	while (*string)
 	{
@@ -24,9 +23,9 @@ int	ft_strchar(char *string, char c)
 	return (0);
 }
 
-void	ft_putnbr_base_adress(size_t n, int fd, int *count, char *base)
+static void	ft_putnbr_base_adress(size_t n, int fd, int *count, char *base)
 {
-	size_t base_len;
+	size_t	base_len;
 
 	base_len = ft_strlen(base);
 	if (n < base_len)
@@ -38,13 +37,13 @@ void	ft_putnbr_base_adress(size_t n, int fd, int *count, char *base)
 	}
 }
 
-void	ft_put_adress_count(void *adresse, int fd, int *count)
+static void	ft_put_adress_count(void *adresse, int fd, int *count)
 {
-	size_t	nb; // unsigned long
+	size_t	nb;
 
 	if (!adresse)
 	{
-		ft_putstr_fd_count("(nil)", fd, count);
+		ft_putstr_fd_count("0x0", fd, count);
 		return ;
 	}
 	nb = (size_t)adresse;
@@ -52,7 +51,7 @@ void	ft_put_adress_count(void *adresse, int fd, int *count)
 	ft_putnbr_base_adress(nb, fd, count, "0123456789abcdef");
 }
 
-void	ft_convert_format(va_list arg_p, char format_character, int *count)
+static void	ft_convert_format(va_list arg_p, char format_character, int *count)
 {
 	if (format_character == '%')
 		ft_putchar_fd_count(format_character, 1, count);

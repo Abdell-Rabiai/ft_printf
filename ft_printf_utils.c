@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 14:23:27 by arabiai           #+#    #+#             */
-/*   Updated: 2022/11/14 19:02:08 by arabiai          ###   ########.fr       */
+/*   Updated: 2022/11/16 13:28:53 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_putchar_fd_count(char c, int fd, int *count)
 	(*count)++;
 }
 
-size_t ft_strlen(char *str)
+size_t	ft_strlen(char *str)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (*str++)
@@ -30,8 +30,8 @@ size_t ft_strlen(char *str)
 
 void	ft_putnbr_base(int n, int fd, int *count, char *base)
 {
-	size_t base_len;
-	long nb;
+	size_t	base_len;
+	long	nb;
 
 	base_len = ft_strlen(base);
 	nb = n;

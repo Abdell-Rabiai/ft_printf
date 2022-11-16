@@ -6,7 +6,7 @@
 #    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 14:20:54 by arabiai           #+#    #+#              #
-#    Updated: 2022/11/14 14:20:55 by arabiai          ###   ########.fr        #
+#    Updated: 2022/11/16 13:27:09 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJECTS) ft_printf.h
 	$(ECHO1)
-	ar rc $(NAME) $(OBJECTS)
+	ar rc $(NAME) $?
 
 %.o: %.c ft_printf.h
 	$(CC) $(CFLAGS) -c $< -o $@
